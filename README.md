@@ -5,24 +5,38 @@ This project integrates Phaser game engine with RainbowKit for blockchain wallet
 ## Project Structure
 
 ```
-/src
-  /components
-    /game               # Phaser game implementation
-      /plugins          # Custom Phaser plugins
-      /scenes           # Game scenes (Menu, Game, etc.)
-      /ui               # Game UI components
-      EventBus.ts       # Event communication system
-      main.ts           # Game initialization
-    Game.tsx            # React wrapper for Phaser game
-    WalletConnect.tsx   # RainbowKit/Wagmi configuration
-  /contexts
-    WalletContext.tsx   # Wallet state management
-  /styles
-    layoutStyles.ts     # Application layout styles
-  /utils
-    canvasUtils.ts      # Canvas manipulation utilities
-  App.tsx               # Main application component
-  main.tsx              # Application entry point
+src/
+  App.tsx                # Main application component
+  main.tsx               # Application entry point
+  index.css, App.css     # Global and app styles
+  assets/                # Static assets (images, SVGs)
+  components/
+    Game.tsx             # React wrapper for Phaser game
+    WalletConnect.tsx    # RainbowKit/Wagmi configuration
+    game/
+      EventBus.ts        # Event communication system
+      main.ts            # Game initialization
+      plugins/
+        AnimatedTilesPlugin.ts # Support for Tiled app export and tileset animation
+      scenes/
+        Boot.ts, Game.ts, GameOver.ts, MainMenu.ts, Preloader.ts # Game scenes
+      ui/
+        buttons/
+          BlueButton.ts  # UI button component
+        modals/
+          BaseModal.ts   # Base modal component
+      utils/
+        GameConfig.ts, MessageManager.ts, TilemapLoader.ts, WalletInterfaces.ts # Game utilities
+  config/
+    walletConfig.ts      # Wallet configuration
+  contexts/
+    useWallet.ts         # Wallet hook
+    WalletContext.tsx    # Wallet state management
+    walletContextTypes.ts # Wallet context types
+  styles/
+    layoutStyles.ts      # Application layout styles
+  utils/
+    canvasUtils.ts       # Canvas manipulation utilities
 ```
 
 ## Features
@@ -58,6 +72,10 @@ The application uses a layered architecture:
    npm run build
    ```
 
+## AnimatedTilesPlugin
+
+The `AnimatedTilesPlugin` (located in `src/components/game/plugins/AnimatedTilesPlugin.ts`) provides support for animated tiles exported from the Tiled map editor. It enables seamless animation of tilesets within Phaser, allowing you to use Tiled's tile animation features directly in your game. This makes it easy to create dynamic environments and effects using Tiled's json export format.
+
 ## Wallet Integration
 
 The wallet integration works through events:
@@ -75,4 +93,3 @@ To customize the game, focus on:
 - `src/components/game/scenes/` - Add or modify game scenes
 - `src/components/game/main.ts` - Configure the Phaser game instance
 - `src/utils/canvasUtils.ts` - Adjust canvas styling and resizing behavior
-```
